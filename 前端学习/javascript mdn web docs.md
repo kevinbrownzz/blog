@@ -1,0 +1,369 @@
+# javascript mdn web docs
+
+### [1.HTML 文档详解](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/HTML_basics#html_文档详解)
+
+以上介绍了一些基本的 HTML 元素，但孤木不成林。现在来看看单个元素如何彼此协同构成一个完整的 HTML 页面。回顾 [文件处理](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/Dealing_with_files) 小节中创建的 `index.html` 示例：
+
+HTMLCopy to Clipboard
+
+```
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>My test page</title>
+  </head>
+  <body>
+    <img src="images/firefox-icon.png" alt="My test image" />
+  </body>
+</html>
+```
+
+这里有：
+
+- `<!DOCTYPE html>`——[文档类型](https://developer.mozilla.org/zh-CN/docs/Glossary/Doctype)。这是必不可少的开头。混沌初分，HTML 尚在襁褓（大约是 1991/92 年）之时，这个元素用来关联 HTML 编写规范，以供自动查错等功能所用。而在当今，它作用有限，可以说仅用于保证文档正常读取。现在知道这些就足够了。
+- `<html></html>`——[``](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/html) 元素。该元素包含整个页面的所有内容，有时候也称作根元素。里面也包含了 `lang` 属性，写明了页面的主要语种。
+- `<head></head>`——该元素。所有那些你加到页面中，且*不*向用户展示的页面内容，都以这个元素为容器。其中包含诸如提供给搜索引擎的[关键字](https://developer.mozilla.org/zh-CN/docs/Glossary/Keyword)和页面描述、用于设置页面样式的 CSS、字符集声明等等。
+- `<meta charset="utf-8">`——该元素指明你的文档使用 UTF-8 字符编码，UTF-8 包括世界绝大多数书写语言的字符。它基本上可以处理任何文本内容。以它为编码还可以避免以后出现某些问题，没有理由再选用其他编码。
+- `<meta name="viewport" content="width=device-width">`——[视口元素](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Viewport_concepts#移动设备的视口)可以确保页面以视口宽度进行渲染，避免移动端浏览器上因页面过宽导致缩放。
+- `<title></title>`—— 该元素设置页面的标题，显示在浏览器标签页上，也作为收藏网页的描述文字。
+- `<body></body>`——该元素包含期望让用户在访问页面时看到的*全部*内容，包括文本、图像、视频、游戏、可播放的音轨或其他内容。
+
+
+
+## 2.[标记文本](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/HTML_basics#标记文本)
+
+本段包含了一些最常用的文本标记 HTML 元素。
+
+### [标题（Heading）](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/HTML_basics#标题（heading）)
+
+标题元素可用于指定内容的标题和子标题。就像一本书的书名、每章的大标题、小标题，等。HTML 文档也是一样。HTML 包括六个级别的标题， <h1> -- <h6>，一般最多用到 3-4 级标题。
+
+### [段落（Paragraph）](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/HTML_basics#段落（paragraph）)
+
+如上文所讲，<p>元素是用来指定段落的。通常用于指定常规的文本内容：
+
+```
+<p>这是一个段落</p>
+```
+
+### [列表（List）](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/HTML_basics#列表（list）)
+
+Web 上的许多内容都是列表，HTML 有一些特别的列表元素。标记列表通常包括至少两个元素。最常用的列表类型为：
+
+1. **无序列表**（Unordered List）中项目的顺序并不重要，就像购物列表。用一个 [``](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ul) 元素包围。
+2. **有序列表**（Ordered List）中项目的顺序很重要，就像烹调指南。用一个 [``](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ol) 元素包围。
+
+列表的每个项目用一个列表项目（List Item）元素 [``](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/li) 包围。
+
+## [链接](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/HTML_basics#链接)
+
+链接非常重要 — 它们赋予 Web 网络属性。要植入一个链接，我们需要使用一个简单的元素 — [``](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a) — a 是 "anchor" （锚）的缩写。要将一些文本添加到链接中.
+
+1. ```
+       <a href="https://www.mozilla.org/zh-CN/about/manifesto/">
+           Mozilla Manifesto
+       </a>
+   ```
+
+
+
+### 3. CSS基础
+
+CSS（Cascading Style Sheets，层叠样式表）是为 web 内容添加样式的代码。本节将介绍 CSS 的基础知识，并解答像这样的问题：怎样将文本设置为红色？怎样将内容显示在屏幕的特定位置？怎样用背景图片或颜色来装饰网页？
+
+## [什么是 CSS？](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/CSS_basics#什么是_css？)
+
+和 HTML 类似，CSS 也不是真正的编程语言，甚至不是标记语言。**CSS 是一门样式表语言**，这也就是说人们可以用它来选择性地为 HTML 元素添加样式。举例来说，以下 CSS 代码选择了所有的段落文字，并将它们设置为红色。
+
+```
+p {
+  color: red;
+}
+```
+
+文件命名为 `style.css` 并保存到 `styles` 文件夹下。
+
+需要将上述 CSS 样式应用到你的 HTML 文档中。否则，这些样式不会改变 HTML 的外观。
+
+1. 打开
+
+    
+
+   ```
+   index.html
+   ```
+
+   粘贴
+
+   ```
+   <link href="styles/style.css" rel="stylesheet" />
+   ```
+
+![](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/CSS_basics/css-declaration-small.png)
+
+整个结构称为**规则集**（*规则集*通常简称*规则*），注意各个部分的名称：
+
+- [选择器（Selector）](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/CSS_basics#选择器（selector）)
+
+  HTML 元素的名称位于规则集开始。它选择了一个或多个需要添加样式的元素（在这个例子中就是 [``](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/p) 元素）。要给不同元素添加样式，只需要更改选择器。
+
+- [声明（Declaration）](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/CSS_basics#声明（declaration）)
+
+  一个单独的规则，如 `color: red;` 用来指定添加样式元素的**属性**。
+
+- [属性（Properties）](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/CSS_basics#属性（properties）)
+
+  改变 HTML 元素样式的途径（本例中 `color` 就是<p> 元素的属性）。CSS 中，由编写人员决定修改哪个属性以改变规则。
+
+- [属性的值（Property value）](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/CSS_basics#属性的值（property_value）)
+
+  在属性的右边，冒号后面即**属性的值**，它从指定属性的众多外观中选择一个值（我们除了 `red` 之外还有很多属性值可以用于 `color` ）。
+
+注意其他重要的语法：
+
+- 除了选择器部分，每个规则集都应该包含在成对的大括号里（`{}`）。
+- 在每个声明里要用冒号（`:`）将属性与属性值分隔开。
+- 在每个规则集里要用分号（`;`）将各个声明分隔开。
+
+如果要同时修改多个属性，只需要将它们用分号隔开，就像这样：
+
+CSSCopy to Clipboard
+
+```javascript
+p {
+  color: red;
+  width: 500px;
+  border: 1px solid black;
+}
+```
+
+### [选择多个元素](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/CSS_basics#选择多个元素)
+
+也可以选择多种类型的元素并为它们添加一组相同的样式。将不同的选择器用逗号分开。例如：
+
+CSSCopy to Clipboard
+
+```
+p,
+li,
+h1 {
+  color: red;
+}
+```
+
+### [不同类型的选择器](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/CSS_basics#不同类型的选择器)
+
+选择器有许多不同的类型。上面只介绍了**元素选择器**，用来选择 HTML 文档中给定的元素。但是选择操作可以更加具体。下面是一些常用的选择器类型：
+
+| 选择器名称                           | 选择的内容                                                   | 示例                                                         |
+| :----------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| 元素选择器（也称作标签或类型选择器） | 所有指定类型的 HTML 元素                                     | `p` 选择 `<p>`                                               |
+| ID 选择器                            | 具有特定 ID 的元素。单一 HTML 页面中，每个 ID 只对应一个元素，一个元素只对应一个 ID | `#my-id` 选择 `<p id="my-id">` 或 `<a id="my-id">`           |
+| 类选择器                             | 具有特定类的元素。单一页面中，一个类可以有多个实例           | `.my-class` 选择 `<p class="my-class">` 和 `<a class="my-class">` |
+| 属性选择器                           | 拥有特定属性的元素                                           | `img[src]` 选择 `<img src="myimage.png">` 但不是 `<img>`     |
+| 伪类选择器                           | 特定状态下的特定元素（比如鼠标指针悬停于链接之上）           | `a:hover` 选择仅在鼠标指针悬停在链接上时的 `<a>` 元素        |
+
+### 4.javascripts
+
+### [变量（Variable）](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/JavaScript_basics#变量（variable）)
+
+[变量](https://developer.mozilla.org/zh-CN/docs/Glossary/Variable) 是存储值的容器。要声明一个变量，先输入关键字 `let` 或 `var`，然后输入合适的名称：
+
+JSCopy to Clipboard
+
+```
+let myVariable;
+```
+
+变量定义后可以进行赋值：
+
+JSCopy to Clipboard
+
+```
+myVariable = "李雷";
+```
+
+也可以将定义、赋值操作写在同一行：
+
+JSCopy to Clipboard
+
+```
+let myVariable = "李雷";
+```
+
+注意变量可以有不同的 [数据类型](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures) ：
+
+| 变量                                                         | 解释                                                         | 示例                                                         |
+| :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| [String](https://developer.mozilla.org/zh-CN/docs/Glossary/String) | 字符串（一串文本）：字符串的值必须用引号（单双均可，必须成对）括起来。 | `let myVariable = '李雷';`                                   |
+| [Number](https://developer.mozilla.org/zh-CN/docs/Glossary/Number) | 数字：无需引号。                                             | `let myVariable = 10;`                                       |
+| [Boolean](https://developer.mozilla.org/zh-CN/docs/Glossary/Boolean) | 布尔值（真 / 假）： `true`/`false` 是 JS 里的特殊关键字，无需引号。 | `let myVariable = true;`                                     |
+| [Array](https://developer.mozilla.org/zh-CN/docs/Glossary/Array) | 数组：用于在单一引用中存储多个值的结构。                     | `let myVariable = [1, '李雷', '韩梅梅', 10];` 元素引用方法：`myVariable[0]`, `myVariable[1]` …… |
+| [Object](https://developer.mozilla.org/zh-CN/docs/Glossary/Object) | 对象：JavaScript 里一切皆对象，一切皆可储存在变量里。这一点要牢记于心。 | `let myVariable = document.querySelector('h1');` 以及上面所有示例都是对象。注意变量可以有不同的 [数据类型](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures) ： |
+
+### [运算符](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/JavaScript_basics#运算符)
+
+[运算符](https://developer.mozilla.org/zh-CN/docs/Glossary/Operator) 是一类数学符号，可以根据两个值（或变量）产生结果。以下表格中介绍了一些最简单的运算符，可以在浏览器控制台里尝试一下后面的示例。
+
+**备注：** 这里说“根据**两个**值（或变量）产生结果”是不严谨的，计算两个变量的运算符称为“二元运算符”，还有一元运算符和三元运算符，下表中的“取非”就是一元运算符。
+
+| 运算符     | 解释                                                         | 符号          | 示例                                                         |
+| :--------- | :----------------------------------------------------------- | :------------ | :----------------------------------------------------------- |
+| 加         | 将两个数字相加，或拼接两个字符串。                           | `+`           | `6 + 9;"Hello " + "world!";`                                 |
+| 减、乘、除 | 这些运算符操作与基础算术一致。只是乘法写作星号，除法写作斜杠。 | `-`, `*`, `/` | `9 - 3;8 * 2; //乘法在 JS 中是一个星号9 / 3;`                |
+| 赋值运算符 | 为变量赋值（你之前已经见过这个符号了）                       | `=`           | `let myVariable = '李雷';`                                   |
+| 等于       | 测试两个值是否相等，并返回一个 `true`/`false` （布尔）值。   | `===`         | `let myVariable = 3;myVariable === 4; // false`              |
+| 不等于     | 和等于运算符相反，测试两个值是否不相等，并返回一个 `true`/`false` （布尔）值。 | `!==`         | `let myVariable = 3;myVariable !== 3; // false`              |
+| 取非       | 返回逻辑相反的值，比如当前值为真，则返回 `false`。           | `!`           | 原式为真，但经取非后值为 `false`： `let myVariable = 3;!(myVariable === 3); // false` |
+
+### [函数（Function）](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/JavaScript_basics#函数（function）)
+
+[函数](https://developer.mozilla.org/zh-CN/docs/Glossary/Function) 用来封装可复用的功能。如果没有函数，一段特定的操作过程用几次就要重复写几次，而使用函数则只需写下函数名和一些简短的信息。之前已经涉及过一些函数，比如：
+
+```
+let myVariable = document.querySelector("h1");
+```
+
+```
+alert("hello!");
+```
+
+`document.querySelector` 和 `alert` 是浏览器内置的函数，随时可用。
+
+如果代码中有一个类似变量名后加小括号 `()` 的东西，很可能就是一个函数。函数通常包括[参数](https://developer.mozilla.org/zh-CN/docs/Glossary/Argument)，参数中保存着一些必要的数据。它们位于括号内部，多个参数之间用逗号分开。
+
+比如， `alert()` 函数在浏览器窗口内弹出一个警告框，还应为其提供一个字符串参数，以告诉它警告框里要显示的内容。
+
+好消息是：人人都能定义自己的函数。下面的示例是为两个参数进行乘法运算的函数：
+
+```
+function multiply(num1, num2) {
+  let result = num1 * num2;
+  return result;
+}
+```
+
+## [完善示例网页](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/JavaScript_basics#完善示例网页)
+
+现在你已经具备了一些 JavaScript 基础，下面来为示例网页添加一些更酷的特性。
+
+### [添加一个图像切换器](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/JavaScript_basics#添加一个图像切换器)
+
+这里将用新的 DOM API 为网页添加另一张图片，并用 JavaScript 使图片在点击时进行切换。
+
+1. 首先，找到另一张你想要在你的页面上展示的图片，且尺寸与第一张图片尽可能相同。
+
+2. 将这张图片储存在你的`images`目录下。
+
+3. 将图片重命名为'firefox2.png'（去掉引号）。
+
+4. 打开
+
+   ```
+   let myImage = document.querySelector("img");
+   
+   myImage.onclick = function () {
+     let mySrc = myImage.getAttribute("src");
+     if (mySrc === "images/firefox-icon.png") {
+       myImage.setAttribute("src", "images/firefox2.png");
+     } else {
+       myImage.setAttribute("src", "images/firefox-icon.png");
+     }
+   };
+   ```
+
+5. 保存所有文件并用浏览器打开 `index.html` 。点击图片可以发现它能够切换了！
+
+## [到底发生了什么？](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/How_the_Web_works#到底发生了什么？)
+
+当你在浏览器里输入一个网址时（在我们的例子里就是走向商店的路上时）：
+
+1. 浏览器在域名系统（DNS）服务器上找出存放网页的服务器的实际地址（找出商店的位置）。
+2. 浏览器发送 HTTP 请求信息到服务器来请拷贝一份网页到客户端（你走到商店并下订单）。这条消息，包括其他所有在客户端和服务器之间传递的数据都是通过互联网使用 TCP/IP 协议传输的。
+3. 服务器同意客户端的请求后，会返回一个“200 OK”信息，意味着“你可以查看这个网页，给你～”，然后开始将网页的文件以数据包的形式传输到浏览器（商店给你商品，你将商品带回家）。
+4. 浏览器将数据包聚集成完整的网页然后将网页呈现给你（商品到了你的门口——新东西，好棒！）。
+
+## [解析组成文件的顺序](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/How_the_Web_works#解析组成文件的顺序)
+
+当浏览器向服务器发送请求获取 HTML 文件时，HTML 文件通常包含 [``](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/link) 和 [``](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/script) 元素，这些元素分别指向了外部的 [CSS](https://developer.mozilla.org/zh-CN/docs/Learn/CSS) 样式表文件和 [JavaScript](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript) 脚本文件。了解这些文件被[浏览器解析](https://developer.mozilla.org/zh-CN/docs/Web/Performance/How_browsers_work#解析)的顺序是很重要的：
+
+- 浏览器首先解析 HTML 文件，并从中识别出所有的 `<link>` 和 `<script>` 元素，获取它们指向的外部文件的链接。
+- 继续解析 HTML 文件的同时，浏览器根据外部文件的链接向服务器发送请求，获取并解析 CSS 文件和 JavaScript 脚本文件。
+- 接着浏览器会给解析后的 HTML 文件生成一个 [DOM](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model) 树（在内存中），会给解析后的 CSS 文件生成一个 [CSSOM](https://developer.mozilla.org/zh-CN/docs/Glossary/CSSOM) 树（在内存中），并且会[编译和执行](https://developer.mozilla.org/zh-CN/docs/Web/Performance/How_browsers_work#其他过程)解析后的 JavaScript 脚本文件。
+- 伴随着构建 DOM 树、应用 CSSOM 树的样式、以及执行 JavaScript 脚本文件，浏览器会在屏幕上绘制出网页的界面；用户看到网页界面也就可以跟网页进行交互了。
+
+## [链接的解析](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML/Creating_hyperlinks#链接的解析)
+
+通过将文本或其他内容包裹在 [``](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a) 元素内，并给它一个包含网址的 [`href`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a#href) 属性（也称为**超文本引用**或**目标**，它将包含一个网址）来创建一个基本链接。
+
+```
+<p>
+  我创建了一个指向
+  <a href="https://www.mozilla.org/zh-CN/">Mozilla 主页</a>的链接。
+</p>
+```
+
+### [文档片段](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML/Creating_hyperlinks#文档片段)
+
+超链接除了可以链接到文档外，也可以链接到 HTML 文档的特定部分（被称为**文档片段**）。要做到这一点，你必须首先给要链接到的元素分配一个 [`id`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes#id) 属性。通常情况下，链接到一个特定的标题是有意义的，这看起来就像下面这样：
+
+```
+<h2 id="Mailing_address">邮寄地址</h2>
+```
+
+为了链接到那个特定的 `id`，要将它放在 URL 的末尾，并在前面包含井号（`#`），例如：
+
+```
+<p>
+  要提供意见和建议，请将信件邮寄至<a href="contacts.html#Mailing_address"
+    >我们的地址</a
+  >。
+</p>
+```
+
+你甚至可以在同一份文档下，通过链接文档片段，来链接到*当前文档的另一部分*：
+
+```
+<p>本页面底部可以找到<a href="#Mailing_address">公司邮寄地址</a>。</p>
+```
+
+## [HTML 布局元素细节](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure#html_布局元素细节)
+
+理解所有 HTML 区段元素具体含义是很有益处的，这一点将随着个人 web 开发经验的逐渐丰富日趋显现。更多细节请查阅 [HTML 元素参考](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element)。现在，你只需要理解以下主要元素的意义：
+
+- main存放每个页面独有的内容。每个页面上只能用一次 `<main>`，且直接位于 [``](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/body) 中。最好不要把它嵌套进其他元素。
+- article包围的内容即一篇文章，与页面其他部分无关（比如一篇博文）。
+- section与 `<article>` 类似，但 `<section>` 更适用于组织页面使其按功能（比如迷你地图、一组文章标题和摘要）分块。一般的最佳用法是：以 [标题](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Howto/Set_up_a_proper_title_hierarchy) 作为开头；也可以把一篇 `<article>` 分成若干部分并分别置于不同的 `<section>` 中，也可以把一个区段 `<section>` 分成若干部分并分别置于不同的 `<article>` 中，取决于上下文。
+- aside包含一些间接信息（术语条目、作者简介、相关链接，等等）。
+- 
+- nav 包含页面主导航功能。其中不应包含二级链接等内容。
+- footer包含了页面的页脚部分。
+
+### [无语义元素](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure#无语义元素)
+
+有时你会发现，对于一些要组织的项目或要包装的内容，现有的语义元素均不能很好对应。有时候你可能只想将一组元素作为一个单独的实体来修饰来响应单一的用 [CSS](https://developer.mozilla.org/zh-CN/docs/Glossary/CSS) 或 [JavaScript](https://developer.mozilla.org/zh-CN/docs/Glossary/JavaScript)。为了应对这种情况，HTML 提供了div 和span元素。应配合使用 [`class`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes#class) 属性提供一些标签，使这些元素能易于查询。
+
+span 是一个内联的（inline）无语义元素，最好只用于无法找到更好的语义元素来包含内容时，或者不想增加特定的含义时。
+
+### [换行与水平分割线](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure#换行与水平分割线)
+
+有时会用到br 和 hr两个元素，需要介绍一下。
+
+#### br ：换行元素
+
+`<br>` 可在段落中进行换行；`<br>` 是唯一能够生成多个短行结构（例如邮寄地址或诗歌）的元素。比如：
+
+```
+<p>
+  从前有个人叫小高<br />
+  他说写 HTML 感觉最好<br />
+  但他写的代码结构语义一团糟<br />
+  他写的标签谁也懂不了。
+</p>
+```
+
+#### hr ：主题性中断元素
+
+`<hr>` 元素在文档中生成一条水平分割线，表示文本中主题的变化（例如话题或场景的改变）。一般就是一条水平的直线。
