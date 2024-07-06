@@ -367,3 +367,71 @@ span 是一个内联的（inline）无语义元素，最好只用于无法找到
 #### hr ：主题性中断元素
 
 `<hr>` 元素在文档中生成一条水平分割线，表示文本中主题的变化（例如话题或场景的改变）。一般就是一条水平的直线。
+
+## [怎样将图片放到网页上？](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Images_in_HTML#怎样将图片放到网页上？)
+
+要想在网页上放置简单的图像，我们需要使用 img 元素。这个元素是[空元素](https://developer.mozilla.org/zh-CN/docs/Glossary/Void_element)（即无法包含任何子内容和结束标签），它需要两个属性才能起作用：`src` 和 `alt`。`src` 属性包含一个 URL，该 URL 指向要嵌入页面的图像。`src` 属性可以是相对 URL 或绝对 URL，这与
+
+a 元素的 `href` 属性类似。如果没有 `src` 属性，`img` 元素就没有图像可加载。
+
+**备注：** 为了更容易理解下面的内容，建议你阅读 [URL 和路径简明入门](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML/Creating_hyperlinks#统一资源定位符（url）与路径（path）快速入门)来复习一下相对和绝对 URL 的概念。
+
+例如，如果你的图像叫做 `dinosaur.jpg`，并且它位于与 HTML 页面相同的目录中，你可以这样嵌入图像：
+
+```
+<img src="dinosaur.jpg" alt="恐龙" />
+```
+
+如果图像在名为 `images` 的子目录中，该子目录位于与 HTML 页面相同的目录中，你可以这样嵌入它：
+
+```
+<img src="images/dinosaur.jpg" alt="恐龙" />
+```
+
+以此类推。
+
+**备注：** 搜索引擎还会读取图像文件名并将其计入 SEO。因此，你应该为图像起一个描述性的文件名；`dinosaur.jpg` 比 `img835.png` 更好。
+
+你也可以使用图像的绝对 URL 进行嵌入，例如：
+
+```
+<img src="https://www.example.com/images/dinosaur.jpg" alt="恐龙" />
+```
+
+然而，不建议使用绝对 URL 进行链接。你需要托管你想要在网站上使用的图像，在比较简单的情况下，通常我们会把网站的图像保存在与 HTML 相同的服务器上。此外，从维护的角度来说，使用相对 URL 比绝对 URL 更有效率（当你将网站迁移到不同的域名时，你不需要更新所有 URL，使其包含新域名）。在更高级的设置中，你可能会使用[内容分发网络（CDN）](https://developer.mozilla.org/zh-CN/docs/Glossary/CDN)来传递图像。
+
+### [备选文本](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Images_in_HTML#备选文本)
+
+我们接下来要看的属性是 `alt`。它的值应该是图片的文本描述，用于在图片无法显示或者因为网速慢而加载缓慢的情况下使用。例如，我们可以把上面的代码修改成这样： 
+
+# 视频和音频内容
+
+现在我们已经可以轻松地为网页添加简单的图像，下一步我们开始为 HTML 文档添加音频和视频播放器。在这篇文章中，我们会使用video 和 audio 元素来完成这件事；然后我们还会了解如何为视频添加标题/字幕。
+
+### video [ 元素](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content#video_元素)
+
+你可以借助video 元素来轻松地嵌入视频。一个简单的例子如下：
+
+```
+<video src="rabbit320.webm" controls>
+  <p>
+    你的浏览器不支持 HTML 视频。可点击<a href="rabbit320.mp4">此链接</a>观看。
+  </p>
+</video>
+```
+
+当中值得注意的有：
+
+当中值得注意的有：
+
+- [`src`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video#src)
+
+  同 [``](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/img) 元素的使用方式相同，`src`（来源）属性指向你想要嵌入到网页中的视频资源，它们的运作方式完全相同。
+
+- [`controls`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video#controls)
+
+  用户应当能够控制视频和音频的播放（这对于患有[癫痫](https://zh.wikipedia.org/wiki/癫痫#病因)的人来说尤为重要）。你必须使用 `controls` 属性来让视频或音频包含浏览器自带的控制界面，或者使用适当的 [JavaScript API](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLMediaElement) 构建自己的界面。至少，界面必须包括启动和停止媒体以及调整音量的方法。
+
+- video 元素内的段落
+
+  这个叫做**后备内容**，当浏览器不支持 `<video>` 元素的时候，就会显示这段内容，借此我们能够对旧的浏览器提供回退。你可以添加任何后备内容，在这个例子中我们提供了一个指向这个视频文件的链接，从而使用户至少可以访问到这个文件，而不会局限于浏览器的支持。
