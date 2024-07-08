@@ -435,3 +435,195 @@ a 元素的 `href` 属性类似。如果没有 `src` 属性，`img` 元素就没
 - video 元素内的段落
 
   这个叫做**后备内容**，当浏览器不支持 `<video>` 元素的时候，就会显示这段内容，借此我们能够对旧的浏览器提供回退。你可以添加任何后备内容，在这个例子中我们提供了一个指向这个视频文件的链接，从而使用户至少可以访问到这个文件，而不会局限于浏览器的支持。
+
+# CSS
+
+## [样式化 HTML 元素](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/First_steps/Getting_started#样式化_html_元素)
+
+通过上一节将大标题变成红色的例子，我们已经展示了我们可以选中并且样式化 HTML 元素。我们通过触发元素选择器实现这一点——元素选择器，即直接匹配 HTML 元素的选择器。例如，若要样式化一个文档中所有的段落，只需使用选择器 `p`。若要将所有段落变成绿色，你可以利用如下方式：
+
+CSSCopy to Clipboard
+
+```
+p {
+  color: green;
+}
+```
+
+用逗号将不同选择器隔开，即可一次使用多个选择器。譬如，若要将所有段落与列表变成绿色，只需：
+
+CSSCopy to Clipboard
+
+```
+p,
+li {
+  color: green;
+}
+```
+
+举个例子吧，咱们把 [class 属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes/class)加到表里面第二个对象。你的列表看起来应该是这样的：
+
+HTMLCopy to Clipboard
+
+```
+<ul>
+  <li>项目一</li>
+  <li class="special">项目二</li>
+  <li>项目 <em>三</em></li>
+</ul>
+```
+
+在 CSS 中，要选中这个 `special` 类，只需在选择器的开头加个西文句点（.）。在你的 CSS 文档里加上如下代码：
+
+CSSCopy to Clipboard
+
+```
+.special {
+  color: orange;
+  font-weight: bold;
+}
+```
+
+CSSCopy to Clipboard
+
+```
+li.special {
+  color: orange;
+  font-weight: bold;
+}
+```
+
+这个意思是说，“选中每个 `special` 类的 `li` 元素”。你真要这样，好了，它对 `<span>` 还有其他元素不起作用了。你可以把这个元素再添上去就是了：
+
+CSSCopy to Clipboard
+
+```
+li.special,
+span.special {
+  color: orange;
+  font-weight: bold;
+}
+```
+
+## [根据元素在文档中的位置确定样式](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/First_steps/Getting_started#根据元素在文档中的位置确定样式)
+
+有时候，你希望某些内容根据它在文档中的位置而有所不同。这里有很多选择器可以为你提供帮助，但现在我们只介绍几个选择器。在我们的文档中有两个 `<em>`元素——一个在段落内，另一个在列表项内。仅选择嵌套在`<li>` 元素内的`<em>`我们可以使用一个称为**包含选择符**的选择器，它只是单纯地在两个选择器之间加上一个空格。
+
+将以下规则添加到样式表。
+
+CSSCopy to Clipboard
+
+```
+li em {
+  color: rebeccapurple;
+}
+```
+
+该选择器将选择`<li>`内部的任何`<em>`元素（`<li>`的后代）。因此在示例文档中，你应该发现第三个列表项内的`<em>`现在是紫色，但是在段落内的那个没发生变化。
+
+另一些可能想尝试的事情是在 HTML 文档中设置直接出现在标题后面并且与标题具有相同层级的段落样式，为此需在两个选择器之间添加一个 `+` 号 (成为 **相邻选择符**)
+
+也将这个规则添加到样式表中：
+
+CSSCopy to Clipboard
+
+```
+h1 + p {
+  font-size: 200%;
+}
+```
+
+## [根据状态确定样式](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/First_steps/Getting_started#根据状态确定样式)
+
+在这篇教程中我们最后要看的一种修改样式的方法就是根据标签的状态确定样式。一个直观的例子就是当我们修改链接的样式时。当我们修改一个链接的样式时我们需要定位（针对） [``](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a) （锚）标签。取决于是否是未访问的、访问过的、被鼠标悬停的、被键盘定位的，亦或是正在被点击当中的状态，这个标签有着不同的状态。你可以使用 CSS 去定位或者说针对这些不同的状态进行修饰——下面的 CSS 代码使得没有被访问的链接颜色变为粉色、访问过的链接变为绿色。
+
+CSSCopy to Clipboard
+
+```
+a:link {
+  color: pink;
+}
+
+a:visited {
+  color: green;
+}
+```
+
+你可以改变链接被鼠标悬停的时候的样式，例如移除下划线，下面的代码就实现了这个功能。
+
+CSSCopy to Clipboard
+
+```
+a:hover {
+  text-decoration: none;
+}
+```
+
+## [CSS 究竟是怎么工作的？](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/First_steps/How_CSS_works#css_究竟是怎么工作的？)
+
+当浏览器展示一个文件的时候，它必须兼顾文件的内容和文件的样式信息，下面我们会了解到它处理文件的标准的流程。需要知道的是，下面的步骤是浏览加载网页的简化版本，而且不同的浏览器在处理文件的时候会有不同的方式，但是下面的步骤基本都会出现。
+
+1. 浏览器载入 HTML 文件（比如从网络上获取）。
+2. 将 HTML 文件转化成一个 DOM（Document Object Model），DOM 是文件在计算机内存中的表现形式，下一节将更加详细的解释 DOM。
+3. 接下来，浏览器会拉取该 HTML 相关的大部分资源，比如嵌入到页面的图片、视频和 CSS 样式。JavaScript 则会稍后进行处理，简单起见，同时此节主讲 CSS，所以这里对如何加载 JavaScript 不会展开叙述。
+4. 浏览器拉取到 CSS 之后会进行解析，根据选择器的不同类型（比如 element、class、id 等等）把他们分到不同的“桶”中。浏览器基于它找到的不同的选择器，将不同的规则（基于选择器的规则，如元素选择器、类选择器、id 选择器等）应用在对应的 DOM 的节点中，并添加节点依赖的样式（这个中间步骤称为渲染树）。
+5. 上述的规则应用于渲染树之后，渲染树会依照应该出现的结构进行布局。
+6. 网页展示在屏幕上（这一步被称为着色）
+
+结合下面的图示更形象：
+
+![img](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/First_steps/How_CSS_works/rendering.svg)
+
+## [ID 选择器](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Type_Class_and_ID_Selectors#id_选择器)
+
+ID 选择器开头为`#`而非句点，不过基本上和类选择器是同种用法。可是在一篇文档中，一个 ID 只会用到一次。它能选中设定了`id`的元素，你可以在 ID 前面加上类型选择器，只指向元素和 ID 都匹配的类。在下面的示例里，你可以看看这两种用法。
+
+### [指向特定元素的类](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Type_Class_and_ID_Selectors#指向特定元素的类)
+
+你能建立一个指向应用一个类的特定元素。在下一个示例里面，我们将会用不同方式高亮一个带有`highlight`类的`<span>`和带有 `highlight`类的`<h1>`标题。我们通过使用附加了类的欲选元素的选择器做到这点，其间没有空格。
+
+```javascript
+span.highlight {
+  background-color: yellow;
+}
+
+h1.highlight {
+  background-color: pink;
+}
+```
+
+```javascript
+<h1 class="highlight">Class selectors</h1>
+<p>Veggies es bonus vobis, proinde vos postulo essum magis <span class="highlight">kohlrabi welsh onion</span> daikon amaranth tatsoi tomatillo
+    melon azuki bean garlic.</p>
+
+<p class="highlight">Gumbo beet greens corn soko <strong>endive</strong> gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard
+    greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.</p>
+```
+
+## [存否和值选择器](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Attribute_selectors#存否和值选择器)
+
+这些选择器允许基于一个元素自身是否存在（例如`href`）或者基于各式不同的按属性值的匹配，来选取元素。
+
+| 选择器              | 示例                            | 描述                                                         |
+| :------------------ | :------------------------------ | :----------------------------------------------------------- |
+| `[*attr*]`          | `a[title]`                      | 匹配带有一个名为*attr*的属性的元素——方括号里的值。           |
+| `[*attr*=*value*]`  | `a[href="https://example.com"]` | 匹配带有一个名为*attr*的属性的元素，其值正为*value*——引号中的字符串。 |
+| `[*attr*~=*value*]` | `p[class~="special"]`           | 匹配带有一个名为*attr*的属性的元素，其值正为*value*，或者匹配带有一个*attr*属性的元素，其值有一个或者更多，至少有一个和*value*匹配。注意，在一列中的好几个值，是用空格隔开的。 |
+| `[*attr*|=*value*]` | `div[lang|="zh"]`               | 匹配带有一个名为*attr*的属性的元素，其值可正为*value*，或者开始为*value*，后面紧随着一个连字符。 |
+
+下面的示例中，你可以看到这些选择器是怎样使用的。
+
+- 使用`li[class]`，我们就能匹配任何有 class 属性的选择器。这匹配了除了第一项以外的所有项。
+- `li[class="a"]`匹配带有一个`a`类的选择器，不过不会选中一部分值为`a`而另一部分是另一个用空格隔开的值的类，它选中了第二项。
+- `li[class~="a"]`会匹配一个`a`类，不过也可以匹配一列用空格分开、包含`a`类的值，它选中了第二和第三项。
+
+## [子字符串匹配选择器](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Attribute_selectors#子字符串匹配选择器)
+
+这些选择器让更高级的属性的值的子字符串的匹配变得可行。例如，如果你有`box-warning`和`box-error`类，想把开头为“box-”字符串的每个物件都匹配上的话，你可以用`[class^="box-"]`来把它们两个都选中。
+
+| 选择器          | 示例                | 描述                                                         |
+| :-------------- | :------------------ | :----------------------------------------------------------- |
+| `[attr^=value]` | `li[class^="box-"]` | 匹配带有一个名为*attr*的属性的元素，其值开头为*value*子字符串。 |
+| `[attr$=value]` | `li[class$="-box"]` | 匹配带有一个名为*attr*的属性的元素，其值结尾为*value*子字符串 |
+| `[attr*=value]` | `li[class*="box"]`  | 匹配带有一个名为*attr*的属性的元素，其值的字符串中的任何地方，至少出现了一次*value*子字符串。 |
