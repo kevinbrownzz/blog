@@ -627,3 +627,199 @@ h1.highlight {
 | `[attr^=value]` | `li[class^="box-"]` | 匹配带有一个名为*attr*的属性的元素，其值开头为*value*子字符串。 |
 | `[attr$=value]` | `li[class$="-box"]` | 匹配带有一个名为*attr*的属性的元素，其值结尾为*value*子字符串 |
 | `[attr*=value]` | `li[class*="box"]`  | 匹配带有一个名为*attr*的属性的元素，其值的字符串中的任何地方，至少出现了一次*value*子字符串。 |
+
+# 关系选择器
+
+- [上一页](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Pseudo-classes_and_pseudo-elements)
+- [概述：CSS 构建](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks)
+- [下一页](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance)
+
+我们要了解的最后一种选择器被命名为关系选择器（Combinator），这是因为它们在其他选择器之间和其他选择器与文档内容的位置之间建立了一种有用的关系的缘故。
+
+| 学习前提： | 基础电脑知识、[安装了基本的软件](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/Installing_basic_software)、[文件处理](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/Dealing_with_files)基本知识、HTML 基础（学习 [HTML 介绍](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML)），以及对 CSS 工作原理的了解（学习[CSS 初步](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/First_steps)） |
+| :--------- | ------------------------------------------------------------ |
+| 目标：     | 了解 CSS 里面可用的不同关系选择器。                          |
+
+## [后代选择器](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Combinators#后代选择器)
+
+后代选择器——典型用单个空格（" "）字符——组合两个选择器，比如，第二个选择器匹配的元素被选择，如果他们有一个祖先（父亲，父亲的父亲，父亲的父亲的父亲，等等）元素匹配第一个选择器。选择器利用后代组合符被称作后代选择器。
+
+```
+body article p
+```
+
+下面的示例中，我们只会匹配处于带有`.box`类的元素里面的`<p>`元素。
+
+<iframe width="100%" height="500" src="https://mdn.github.io/css-examples/learn/selectors/descendant.html" loading="lazy" style="box-sizing: initial; border: 1px solid var(--border-primary); max-width: 100%; width: calc(100% - 2px - 2rem); background: rgb(255, 255, 255); border-radius: var(--elem-radius); padding: 1rem;"></iframe>
+
+[子代关系选择器](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Combinators#子代关系选择器)
+
+子代关系选择器是个大于号（`>`），只会在选择器选中直接子元素的时候匹配。继承关系上更远的后代则不会匹配。例如，只选中作为`<article>`的直接子元素的`<p>`元素：
+
+```
+article > p
+```
+
+下个示例中，我们弄了个有序列表，内嵌于另一个无序列表里面。我用子代关系选择器，只选中为`<ul>`的直接子元素的`<li>`元素，给了它们一个顶端边框。
+
+如果你移去指定子代选择器的`>`的话，你最后得到的是后代选择器，所有的`<li>`会有个红色的边框。
+
+<iframe width="100%" height="600" src="https://mdn.github.io/css-examples/learn/selectors/child.html" loading="lazy" style="box-sizing: initial; border: 1px solid var(--border-primary); max-width: 100%; width: calc(100% - 2px - 2rem); background: rgb(255, 255, 255); border-radius: var(--elem-radius); padding: 1rem;"></iframe>
+
+## [邻接兄弟](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Combinators#邻接兄弟)
+
+邻接兄弟选择器（`+`）用来选中恰好处于另一个在继承关系上同级的元素旁边的物件。例如，选中所有紧随`<p>`元素之后的`<img>`元素：
+
+```
+p + img
+```
+
+常见的使用场景是，改变紧跟着一个标题的段的某些表现方面，就像是我下面的示例那样。这里我们寻找一个紧挨`<h1>`的段，然后样式化它。
+
+如果你往`<h1>`和`<p>`之间插入其他的某个元素，例如`<h2>`，你将会发现，段落不再与选择器匹配，因而不会应用元素邻接时的前景和背景色。
+
+<iframe width="100%" height="800" src="https://mdn.github.io/css-examples/learn/selectors/adjacent.html" loading="lazy" style="box-sizing: initial; border: 1px solid var(--border-primary); max-width: 100%; width: calc(100% - 2px - 2rem); background: rgb(255, 255, 255); border-radius: var(--elem-radius); padding: 1rem;"></iframe>
+
+## [通用兄弟](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Combinators#通用兄弟)
+
+如果你想选中一个元素的兄弟元素，即使它们不直接相邻，你还是可以使用通用兄弟关系选择器（`~`）。要选中所有的`<p>`元素后*任何地方*的`<img>`元素，我们会这样做：
+
+```
+p ~ img
+```
+
+在下面的示例中，我们选中了所有的 `<h1>`之后的`<p>`元素，虽然文档中还有个 `<div>`，其后的`<p>`还是被选中了。
+
+<iframe width="100%" height="600" src="https://mdn.github.io/css-examples/learn/selectors/general.html" loading="lazy" style="box-sizing: initial; border: 1px solid var(--border-primary); max-width: 100%; width: calc(100% - 2px - 2rem); background: rgb(255, 255, 255); border-radius: var(--elem-radius); padding: 1rem;"><[使用关系选择器](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors/Combinators#使用关系选择器)
+
+你能用关系选择器，将任何在我们前面的学习过程中学到的选择器组合起来，选出你的文档中的一部分。例如如果我们想选中为`<ul>`的直接子元素的带有“a”类的列表项的话，我可以用下面的代码。
+
+
+
+```
+ul > li[class="a"] {
+}
+```
+
+## [冲突规则](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance#冲突规则)
+
+CSS 代表**层叠样式表**（Cascading Style Sheets），理解第一个词*层叠*（cascade）很重要——层叠的表现方式是理解 CSS 的关键。
+
+在某些时候，在做一个项目过程中你会发现一些应该产生效果的样式没有生效。通常的原因是你创建了两个应用于同一个元素的规则。与[**层叠**](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Cascade)密切相关的概念是[**优先级**（specificity）](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Specificity)，决定在发生冲突的时候应该使用哪条规则。设计元素样式的规则可能不是期望的规则，因此需要了解这些机制是如何工作的。
+
+这里也有[**继承**](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Inheritance)的概念，也就是在默认情况下，一些 css 属性继承当前元素的父元素上设置的值，有些则不继承。这也可能导致一些和期望不同的结果。
+
+我们来快速地看下正在处理的关键问题，然后依次了解它们是如何相互影响的，以及如何和 CSS 交互的。虽然这些概念难以理解，但是随着不断的练习，你会慢慢熟悉它的工作原理。
+
+### [层叠](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance#层叠)
+
+样式表[**层叠**](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Cascade)——简单的说，就是 CSS 规则的顺序很重要；当应用两条同级别的规则到一个元素的时候，写在后面的就是实际使用的规则。
+
+### [优先级](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance#优先级)
+
+浏览器是根据[优先级](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Specificity)来决定当多个规则有不同选择器对应相同的元素的时候需要使用哪个规则。它基本上是一个衡量选择器具体选择哪些区域的尺度：
+
+- 一个元素选择器不是很具体，则会选择页面上该类型的所有元素，所以它的优先级就会低一些。
+- 一个类选择器稍微具体点，则会选择该页面中有特定 `class` 属性值的元素，所以它的优先级就要高一点。
+
+### [继承](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance#继承)
+
+继承也需要在上下文中去理解——一些设置在父元素上的 CSS 属性是可以被子元素继承的，有些则不能。
+
+举一个例子，如果你设置一个元素的 `color` 和 `font-family`，每个在里面的元素也都会有相同的属性，除非你直接在元素上设置属性。
+
+### [控制继承](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance#控制继承)
+
+
+
+
+
+CSS 为控制继承提供了五个特殊的通用属性值。每个 CSS 属性都接收这些值。
+
+- [`inherit`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/inherit)
+
+  设置该属性会使子元素属性和父元素相同。实际上，就是“开启继承”。
+
+- [`initial`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/initial)
+
+  将应用于选定元素的属性值设置为该属性的[初始值](https://developer.mozilla.org/zh-CN/docs/Web/CSS/initial_value)。
+
+- [`revert`](https://developer.mozilla.org/en-US/docs/Web/CSS/revert)
+
+  将应用于选定元素的属性值重置为浏览器的默认样式，而不是应用于该属性的默认值。在许多情况下，此值的作用类似于 [`unset`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/unset)。
+
+- [`revert-layer`](https://developer.mozilla.org/en-US/docs/Web/CSS/revert-layer)
+
+  将应用于选定元素的属性值重置为在上一个[层叠层](https://developer.mozilla.org/zh-CN/docs/Web/CSS/@layer)中建立的值。
+
+- [`unset`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/unset)
+
+  将属性重置为自然值，也就是如果属性是自然继承那么就是 `inherit`，否则和 `initial` 一样
+
+# 盒模型
+
+## [区块盒子与行内盒子](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/The_box_model#区块盒子与行内盒子)
+
+在 CSS 中，我们有几种类型的盒子，一般分为**区块盒子**（block boxes）和**行内盒子**（inline boxes）。类型指的是盒子在页面流中的行为方式以及与页面上其他盒子的关系。盒子有**内部显示**（inner display type）和**外部显示**（outer display type）两种类型。
+
+一般来说，可以使用 [`display`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/display) 属性为显示类型设置各种值，该属性可以有多种值。
+
+## [外部显示类型](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/The_box_model#外部显示类型)
+
+一个拥有 `block` 外部显示类型的盒子会表现出以下行为：
+
+- 盒子会产生换行。
+- [`width`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/width) 和 [`height`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/height) 属性可以发挥作用。
+- 内边距、外边距和边框会将其他元素从当前盒子周围“推开”。
+- 如果未指定 [`width`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/width)，方框将沿行向扩展，以填充其容器中的可用空间。在大多数情况下，盒子会变得与其容器一样宽，占据可用空间的 100%。
+
+某些 HTML 元素，如 `<h1>` 和 `<p>`，默认使用 `block` 作为外部显示类型。
+
+一个拥有 `inline` 外部显示类型的盒子会表现出以下行为：
+
+- 盒子不会产生换行。
+- [`width`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/width) 和 [`height`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/height) 属性将不起作用。
+- 垂直方向的内边距、外边距以及边框会被应用但是不会把其他处于 `inline` 状态的盒子推开。
+- 水平方向的内边距、外边距以及边框会被应用且会把其他处于 `inline` 状态的盒子推开。
+
+某些 HTML 元素，如 `<a>`、 `<span>`、 `<em>` 以及 `<strong>`，默认使用 `inline` 作为外部显示类型。
+
+### [盒模型的各个部分](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/The_box_model#盒模型的各个部分)
+
+CSS 中组成一个区块盒子需要：
+
+- **内容盒子**：显示内容的区域；使用 [`inline-size`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/inline-size) 和 [`block-size`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/block-size) 或 [`width`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/width) 和 [`height`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/height) 等属性确定其大小。
+- **内边距盒子**：填充位于内容周围的空白处；使用 [`padding`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/padding) 和相关属性确定其大小。
+- **边框盒子**：边框盒子包住内容和任何填充；使用 [`border`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/border) 和相关属性确定其大小。
+- **外边距盒子**：外边距是最外层，其包裹内容、内边距和边框，作为该盒子与其他元素之间的空白；使用 [`margin`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin) 和相关属性确定其大小。
+
+下图显示了这些层次：
+
+![盒模型示意图](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/The_box_model/box-model.png)
+
+### [CSS 替代盒模型](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/The_box_model#css_替代盒模型)
+
+在替代盒模型中，任何宽度都是页面上可见方框的宽度。内容区域的宽度是该宽度减去填充和边框的宽度（见下图）。无需将边框和内边距相加，即可获得盒子的实际大小。
+
+要为某个元素使用替代模型，可对其设置 `box-sizing: border-box`：
+
+## [外边距、内边距和边框](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/The_box_model#外边距、内边距和边框)
+
+在上面的示例中，你已经看到了 [`margin`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin)、[`padding`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/padding) 和 [`border`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/border) 属性的作用。该示例中使用了**简写属性**，允许我们一次性设置盒子的所有边。这些简写属性也有等效的普通属性，可以单独控制盒子的不同边。
+
+接下来，让我们更详细地探究这些属性。
+
+### [外边距](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/The_box_model#外边距)
+
+外边距是盒子周围一圈看不到的空间。它会把其他元素退推离盒子。外边距属性值可以为正也可以为负。在盒子一侧设置负值会导致盒子和页面上的其他内容重叠。无论使用标准模型还是替代模型，外边距总是在计算可见部分后额外添加。
+
+我们可以使用 [`margin`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin) 属性一次性控制一个元素的所有外边距，或者每边单独使用等价的普通属性控制：
+
+- [`margin-top`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin-top)
+- [`margin-right`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin-right)
+- [`margin-bottom`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin-bottom)
+- [`margin-left`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin-left)
+
+**在下面的示例中，尝试更改外边距的值，来查看当前元素和其包含元素，在外边距设置为正时如何推开周边元素，以及设置为负时，是如何收缩空间的。**
+
+<iframe width="100%" height="800" src="https://mdn.github.io/css-examples/learn/box-model/margin.html" loading="lazy" style="box-sizing: initial; border: 1px solid var(--border-primary); max-width: 100%; width: calc(100% - 2px - 2rem); background: rgb(255, 255, 255); border-radius: var(--elem-radius); padding: 1rem;"></iframe>
