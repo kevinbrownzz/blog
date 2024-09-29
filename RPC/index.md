@@ -4,4 +4,4 @@
 
 ## 笔记目录
 
-- [RPC 框架简单实现](/RPC/RPC-framework-simple.md)
+- [RPC 框架简单实现](/notes/RPC/RPC-framework-simple.md)

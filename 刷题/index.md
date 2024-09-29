@@ -4,8 +4,8 @@
 
 ## 笔记目录
 
-- [LeetCode Hot 100](/刷题/hot100_二刷.md)
-- [图论笔记](/刷题/图论.md)
-- [链表笔记](/刷题/list.md)
-- [树结构笔记](/刷题/tree.md)
-- [双射笔记](/刷题/双射.md)
+- [LeetCode Hot 100](/notes/刷题/hot100_二刷.md)
+- [图论笔记](/notes/刷题/图论.md)
+- [链表笔记](/notes/刷题/list.md)
+- [树结构笔记](/notes/刷题/tree.md)
+- [双射笔记](/notes/刷题/双射.md)

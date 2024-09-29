@@ -237,7 +237,7 @@ S 在单个查询中从不同的表返回类似结构的数据；
 
  对单个表执行多个查询，按单个查询返回数据。
 
-![image-20240716203721436](D:\desktop\笔记\img\Mysql必知必会\mysql1.png)
+<!-- ![image-20240716203721436](D:\desktop\笔记\img\Mysql必知必会\mysql1.png) -->
 
  UNION必须由两条或两条以上的SELECT语句组成，语句之间用关键字UNION分隔（因此，如果组合4条SELECT语句，将要使用3个UNION关键字）。
 

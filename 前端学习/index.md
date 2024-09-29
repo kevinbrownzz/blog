@@ -4,5 +4,5 @@
 
 ## 笔记目录
 
-- [JavaScript 笔记](/前端学习/JavaScripts.md)
-- [JavaScript MDN 文档](/前端学习/javascript mdn web docs.md)
+- [JavaScript 笔记](/notes/前端学习/JavaScripts.md)
+- [JavaScript MDN 文档](/notes/前端学习/javascript mdn web docs.md)
