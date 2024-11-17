@@ -4,8 +4,8 @@
 
 ## 笔记目录
 
-- [Java Guide](/JAVA语言特性/Javaguide.md)
-- [Java 常用数据结构接口](/JAVA语言特性/Java常用数据结构的抽象接口和类.md)
-- [Java 并发笔记](/JAVA语言特性/Java并发blog阅读.md)
-- [JVM 笔记](/JAVA语言特性/jvm.md)
-- [二哥的 Java 进阶之路](/JAVA语言特性/二哥的Java进阶之路.md)
+- [Java Guide](/notes/JAVA语言特性/Javaguide.md)
+- [Java 常用数据结构接口](/notes/JAVA语言特性/Java常用数据结构的抽象接口和类.md)
+- [Java 并发笔记](/notes/JAVA语言特性/Java并发blog阅读.md)
+- [JVM 笔记](/notes/JAVA语言特性/jvm.md)
+- [二哥的 Java 进阶之路](/notes/JAVA语言特性/二哥的Java进阶之路.md)

@@ -4,4 +4,4 @@
 
 ## 笔记目录
 
-- [Golang 学习笔记](/GO语言特性/golang学习.md)
+- [Golang 学习笔记](/notes/GO语言特性/golang学习.md)
