@@ -210,3 +210,227 @@ SELECT * FROM 表名 WHERE 列名A REGEXP '\\.';
 这并不是期望的输出，.匹配任意字符，因此每个行都被检索出
 来。  
 **为了匹配特殊字符，必须用\\为前导。\\-表示查找-，\\.表示查找.**
+
+
+
+#### 9.联结
+
+内部联结或等值联结（equijoin）的简单联结。现在来看3种其他联结，它们分别是自联结、自然联结和外部联结。
+
+
+
+
+
+
+
+####  10.组 合 查 询
+
+本章讲述如何利用UNION操作符将多条SELECT语句组合成一个结果
+
+集。
+
+ 组合查询
+
+多数SQL查询都只包含从一个或多个表中返回数据的单条SELECT语句。MySQL也允许执行多个查询（多条SELECT语句），并将结果作为单个查询结果集返回。这些组合查询通常称为并（union）或复合查询（compound query）。有两种基本情况，其中需要使用组合查询：
+
+S 在单个查询中从不同的表返回类似结构的数据；
+
+ 对单个表执行多个查询，按单个查询返回数据。
+
+![image-20240716203721436](D:\desktop\笔记\img\Mysql必知必会\mysql1.png)
+
+ UNION必须由两条或两条以上的SELECT语句组成，语句之间用关键字UNION分隔（因此，如果组合4条SELECT语句，将要使用3个UNION关键字）。
+
+ UNION中的每个查询必须包含相同的列、表达式或聚集函数（不过各个列不需要以相同的次序列出）。
+
+ 列数据类型必须兼容：类型不必完全相同，但必须是DBMS可以隐含地转换的类型（例如，不同的数值类型或不同的日期类型）。如果遵守了这些基本规则或限制，则可以将并用于任何数据检索任务
+
+小结
+
+本章讲授如何用UNION操作符来组合SELECT语句。利用UNION，可把多条查询的结果作为一条组合查询返回，不管它们的结果中包含还是不包含重复。使用UNION可极大地简化复杂的WHERE子句，简化从多个表中检索数据的工作
+
+
+
+
+
+#### 11.INSERT UPDATE DELETE
+
+主键值必须唯一。即，表中的每个行必须具有唯一的主
+
+键值。如果主键使用单个列，则它的值必须唯一。如果使用多个列，则
+
+这些列的组合值必须唯一。
+
+
+
+
+
+```sql
+id                     int               NOT NULL            AUTO_INCREMENT,
+```
+
+AUTO_INCREMENT发挥作用的时候了。请看以下代码行（用来
+
+创建customers表的CREATE TABLE语句的组成部分）：
+
+AUTO_INCREMENT告诉MySQL，本列每当增加一行时自动增量。每次
+
+执行一个INSERT操作时，MySQL自动对该列增量
+
+
+
+
+
+为了使用ALTER TABLE更改表结构，必须给出下面的信息：
+
+ 在ALTER TABLE之后给出要更改的表名（该表必须存在，否则将
+
+出错）；
+
+ 所做更改的列表。
+
+下面的例子给表添加一个列
+
+```sql
+ALTER TABLE vendors ADD vend_phone CHAR(20);
+```
+
+
+
+删除刚刚添加的列，可以这样做：
+
+```sql
+ALTER TABLE Vendors DROP COLUMN vend phone;
+```
+
+
+
+ALTER TABLE的一种常见用途是定义外键。下面是用来定义本书中的
+
+表所用的外键的代码
+
+```sql
+ALTER TABLE orderitemsADD CONSTRAINT fk_orderitems_orders FOREIGN KEY(order_num) REFERENCES orders(order_num);
+ALTER TABLE orderitemsADD CONSTRAINT fk_orderitems_products FOREIGN KEY(prod id)REFERENCES products(prod id);
+```
+
+
+
+21.3 删除表
+
+删除表（删除整个表而不是其内容）非常简单，使用DROP TABLE语
+
+句即可：
+
+这条语句删除customers 2表（假设它存在）。删除表没有确认，也不能撤销，执行这条语句将永久删除该表。
+
+21.4 重命名表
+
+使用RENAME TABLE语句可以重命名一个表
+
+```sql
+RENAME TABLE customer1 to customer2
+```
+
+
+
+
+
+
+
+#### 12 视图
+
+视图是虚拟的表。与包含数据的表不一样，视图只包含使用时动态检索数据的查询
+
+
+
+为什么使用视图
+
+我们已经看到了视图应用的一个例子。下面是视图的一些常见应用。
+
+ 重用SQL语句。
+
+ 简化复杂的SQL操作。在编写查询后，可以方便地重用它而不必知道它的基本查询细节。
+
+ 使用表的组成部分而不是整个表。
+
+ 保护数据。可以给用户授予表的特定部分的访问权限而不是整个表的访问权限。
+
+ 更改数据格式和表示。视图可返回与底层表的表示和格式不同的数据
+
+##### 更新视图
+
+迄今为止的所有视图都是和SELECT语句使用的。然而，视图的数据
+
+能否更新？答案视情况而定。
+
+通常，视图是可更新的（即，可以对它们使用INSERT、UPDATE和
+
+DELETE）。更新一个视图将更新其基表（可以回忆一下，视图本身没有数
+
+据）。如果你对视图增加或删除行，实际上是对其基表增加或删除行。
+
+
+
+
+
+#### 13 管理事务处理
+
+事务处理（transaction processing）可以用来维护数据库的完整性，它保证成批的MySQL操作要么完全执行，要么完全不执行。
+
+ 事务（transaction）指一组SQL语句；
+
+ 回退（rollback）指撤销指定SQL语句的过程；
+
+ 提交（commit）指将未存储的SQL语句结果写入数据库表；
+
+ 保留点（savepoint）指事务处理中设置的临时占位符（placeholder），你可以对它发布回退（与回退整个事务处理不同）。
+
+```sql
+
+SELECT * FROM ordertotals;
+
+START TRANSACTION;
+
+DELETE FROM ordertotals;
+
+SELECT * FROM ordertotals;
+
+ROLLBACK;
+SELECT * FROM ordertotals;
+```
+
+
+
+。这时用一条ROLLBACK语句回退START TRANSACTION之后的所有语句，最后一条SELECT语句显示该表不为空。
+
+显然，ROLLBACK只能在一个事务处理内使用（在执行一条STARTTRANSACTION命令之后）。
+
+哪些语句可以回退？ 事务处理用来管理INSERT、UPDATE和DELETE语句。你不能回退SELECT语句。（这样做也没有什么意
+
+义。）你不能回退CREATE或DROP操作。事务处理块中可以使用这两条语句，但如果你执行回退，它们不会被撤销。
+
+
+
+
+
+一般的MySQL语句都是直接针对数据库表执行和编写的。这就是所谓的隐含提交（implicit commit），即提交（写或保存）操作是自动进行的。
+
+但是，在事务处理块中，提交不会隐含地进行。为进行明确的提交，使用COMMIT语句，如下所示：
+
+```sql
+START TRANSACTION;
+DELETE FROM orderitems WHERE order_num=20010;
+DELETE FROM orders WHERE order num=20010:
+COMMIT;
+```
+
+
+
+##### 使用保留点
+
+简单的ROLLBACK和COMMIT语句就可以写入或撤销整个事务处理。但是，只是对简单的事务处理才能这样做，更复杂的事务处理可能需要部分提交或回退。
+
+例如，前面描述的添加订单的过程为一个事务处理。如果发生错误，只需要返回到添加orders行之前即可，不需要回退到customers表（如果存在的话）。
+
+为了支持回退部分事务处理，必须能在事务处理块中合适的位置放置占位符。这样，如果需要回退，可以回退到某个占位符。这些占位符称为保留点。为了创建占位符，可如下使用SAVEPOINT
